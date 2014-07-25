@@ -17,9 +17,16 @@ module.exports = Controller.extend({
 
   openModal: function (options) {
     this.layout.openModal(options);
+    
+    // Original path (on page load)
+    this.originalFragment = Backbone.history.fragment;
 
-    this.listenToOnce(routerChannel.vent, 'route', function () {
-      this.destroyModal();
+    this.listenTo(routerChannel.vent, 'route', function () {
+      
+      // If the path is not the same as the path on page load, we close the modal
+      if (Backbone.history.fragment != this.originalFragment) {
+        this.destroyModal();
+      }
     });
   },
 
