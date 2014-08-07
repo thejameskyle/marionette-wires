@@ -10,7 +10,6 @@ module.exports = Model.extend({
   },
 
   initialize: function() {
-    var self = this;
     if (this.get('timeout') !== false) {
       this._setTimeout();
     }
@@ -18,7 +17,7 @@ module.exports = Model.extend({
     this.on('destroy', this._clearTimeout);
 
     if (this.get('clearOnRoute')) {
-      Backbone.history.on('route', function(router, route, params) {self.destroy();});
+      this.listenTo(Backbone.history, 'route', this.destroy);
     }
   },
 
