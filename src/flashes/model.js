@@ -15,6 +15,7 @@ module.exports = Model.extend({
     }
 
     this.on('destroy', this._clearTimeout);
+    this.on('destroy', this.stopListening);
 
     if (this.get('clearOnRoute')) {
       this.listenTo(Backbone.history, 'route', this.destroy);
