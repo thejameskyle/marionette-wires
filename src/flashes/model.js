@@ -2,8 +2,6 @@ var _ = require('underscore');
 var Radio = require('backbone.radio');
 var Model = require('../classes/model');
 
-var routerChannel = Radio.channel('router');
-
 module.exports = Model.extend({
   defaults: {
     timeout: false,
@@ -12,6 +10,7 @@ module.exports = Model.extend({
   },
 
   initialize: function() {
+    var self = this;
     if (this.get('timeout') !== false) {
       this._setTimeout();
     }
@@ -19,7 +18,7 @@ module.exports = Model.extend({
     this.on('destroy', this._clearTimeout);
 
     if (this.get('clearOnRoute')) {
-      this.listenTo(routerChannel, 'route', this.destroy);
+      Backbone.history.on('route', function(router, route, params) {self.destroy();});
     }
   },
 
