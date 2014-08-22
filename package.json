@@ -51,7 +51,8 @@
     "morgan": "^1.1.1",
     "proxyquire": "^1.0.1",
     "sinon": "^1.10.2",
-    "sinon-chai": "^2.5.0"
+    "sinon-chai": "^2.5.0",
+    "grunt-cli": "^0.1.13"
   },
   "dependencies": {
     "backbone": "^1.1.2",
