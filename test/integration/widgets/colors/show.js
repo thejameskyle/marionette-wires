@@ -1,3 +1,4 @@
+/* global -Promise */
 var Promise = require('bluebird');
 var _ = require('underscore');
 
@@ -14,10 +15,8 @@ module.exports = function() {
     },
 
     isActive: function() {
-      return this.find({
+      return this.isVisible({
         text: 'Deactivate'
-      }).then(function(el) {
-        return !!el;
       });
     },
 

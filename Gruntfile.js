@@ -120,12 +120,13 @@ module.exports = function (grunt) {
       }
     },
 
-    pioneer: {
-      options: {
-        features : 'test/integration/features',
-        steps    : 'test/integration/steps',
-        widgets  : 'test/integration/widgets',
-        format   : 'pretty'
+    run: {
+      pioneer: {
+        cmd: 'npm',
+        args: [
+          'run',
+          'integration'
+        ]
       }
     },
 
@@ -182,12 +183,21 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'symlink',
     'jshint',
-    'mochaTest'
+    'mochaTest',
+    'connect',
+    'run:pioneer'
+  ]);
+
+  grunt.registerTask('test-travis', [
+    'symlink',
+    'jshint',
+    'mochaTest',
+    'run:pioneer'
   ]);
 
   grunt.registerTask('test:integration', [
     'connect',
-    'pioneer'
+    'run:pioneer'
   ]);
 
   grunt.registerTask('serve', [
