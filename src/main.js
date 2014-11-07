@@ -1,5 +1,10 @@
 require('./plugins');
 var Backbone = require('backbone');
+var Marionette = require('backbone.marionette');
+
+// start the marionette inspector
+window.__agent && window.__agent.start(Backbone, Marionette);
+
 var Application = require('src/application/application');
 
 var app = new Application();
