@@ -3,11 +3,11 @@ var Radio = require('backbone.radio');
 var IndexRoute = require('./route');
 
 module.exports = Router.extend({
-  initialize: function(options) {
+  initialize(options) {
     this.container = options.container;
   },
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     Radio.command('header', 'activate', { path: '' });
   },
 
@@ -15,7 +15,7 @@ module.exports = Router.extend({
     '': 'index'
   },
 
-  index: function() {
+  index() {
     return new IndexRoute({
       container: this.container
     });

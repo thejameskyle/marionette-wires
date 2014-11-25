@@ -7,7 +7,7 @@ module.exports = Model.extend({
     active: false
   },
 
-  validate: function (attrs) {
+  validate(attrs) {
     var errors = [];
 
     if (attrs.name === '') {

@@ -3,7 +3,7 @@ var Model = require('src/common/model');
 module.exports = Model.extend({
   urlRoot: '/api/books',
 
-  isActive: function() {
+  isActive() {
     return this.collection.active === this;
   }
 });

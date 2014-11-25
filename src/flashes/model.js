@@ -9,7 +9,7 @@ module.exports = Model.extend({
     clearOnRoute: true
   },
 
-  initialize: function() {
+  initialize() {
     if (this.get('timeout') !== false) {
       this._setTimeout();
     }
@@ -21,11 +21,11 @@ module.exports = Model.extend({
     }
   },
 
-  _setTimeout: function() {
+  _setTimeout() {
     this._timeout = setTimeout(_.bind(this.destroy, this), this.get('timeout'));
   },
 
-  _clearTimeout: function() {
+  _clearTimeout() {
     if (this._timeout) {
       clearTimeout(this._timeout);
       delete this._timeout;

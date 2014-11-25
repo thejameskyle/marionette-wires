@@ -6,19 +6,19 @@ var Radio = require('backbone.radio');
 var Route = require('./route');
 
 module.exports = Marionette.AppRouter.extend({
-  constructor: function() {
+  constructor() {
     this.channel = Radio.channel('router');
     this.on('all', this._onRouterEvent);
     this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
     Marionette.AppRouter.apply(this, arguments);
   },
 
-  _onRouterEvent: function(name) {
+  _onRouterEvent(name) {
     var args = _.toArray(arguments).slice(1);
     this.channel.trigger.apply(this.channel, [name, this].concat(args));
   },
 
-  _onHistoryRoute: function(router) {
+  _onHistoryRoute(router) {
     if (this === router) {
       this.active = true;
     } else {
@@ -26,25 +26,23 @@ module.exports = Marionette.AppRouter.extend({
     }
   },
 
-  execute: function(callback, args) {
-    var self = this;
-
+  execute(callback, args) {
     if (!this.active) {
       this.triggerMethod.apply(this, ['before:enter'].concat(args));
     }
 
     this.triggerMethod.apply(this, ['before:route'].concat(args));
 
-    $.when(this._execute(callback, args)).then(function() {
-      if (!self.active) {
-        self.triggerMethod.apply(self, ['enter'].concat(args));
+    $.when(this._execute(callback, args)).then(() => {
+      if (!this.active) {
+        this.triggerMethod.apply(this, ['enter'].concat(args));
       }
 
-      self.triggerMethod.apply(self, ['route'].concat(args));
+      this.triggerMethod.apply(this, ['route'].concat(args));
     });
   },
 
-  _execute: function(callback, args) {
+  _execute(callback, args) {
     var route = callback.apply(this, args);
 
     if (route instanceof Route) {

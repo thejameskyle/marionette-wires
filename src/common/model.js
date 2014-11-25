@@ -4,23 +4,23 @@ var Radio = require('backbone.radio');
 var flashesChannel = Radio.channel('flashes');
 
 module.exports = Backbone.Model.extend({
-  constructor: function() {
+  constructor() {
     Backbone.Model.apply(this, arguments);
     this.on('request', this.handleRequest);
     this.on('error', this.handleError);
   },
 
-  handleRequest: function() {
+  handleRequest() {
     flashesChannel.command('remove', this.serverError);
     delete this.serverError;
   },
 
-  handleError: function() {
+  handleError() {
     this.serverError = { type: 'danger', title: 'Server Error' };
     flashesChannel.command('add', this.serverError);
   },
 
-  cleanup: function() {
+  cleanup() {
     if (this.serverError) {
       flashesChannel.command('remove', this.serverError);
     }

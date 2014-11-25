@@ -6,7 +6,7 @@ module.exports = ItemView.extend({
   template: template,
   className: 'colors__item list-group-item',
 
-  attributes: function () {
+  attributes() {
     return {
       href: '#colors/' + this.model.get('id')
     };

@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 
 module.exports = Backbone.Collection.extend({
-  constructor: function() {
+  constructor() {
     Backbone.Collection.apply(this, arguments);
     this._isNew = true;
     this.once('sync', function() {
@@ -9,7 +9,7 @@ module.exports = Backbone.Collection.extend({
     });
   },
 
-  isNew: function() {
+  isNew() {
     return this._isNew;
   }
 });

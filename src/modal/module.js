@@ -10,13 +10,13 @@ var ConfirmView = require('./confirm/view');
 var PromptView  = require('./prompt/view');
 
 module.exports = Module.extend({
-  initialize: function() {
+  initialize() {
     this.container = this.options.container;
     this.channel = Radio.channel('modal');
     this.start();
   },
 
-  onStart: function() {
+  onStart() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
@@ -33,17 +33,17 @@ module.exports = Module.extend({
     });
   },
 
-  onStop: function() {
+  onStop() {
     this.channel.reset();
   },
 
-  onRoute: function() {
+  onRoute() {
     if (this.fragment !== Backbone.history.fragment) {
       this.close();
     }
   },
 
-  alert: function(options) {
+  alert(options) {
     var deferred = $.Deferred();
     var view = new AlertView(options);
 
@@ -55,7 +55,7 @@ module.exports = Module.extend({
     return deferred;
   },
 
-  confirm: function(options) {
+  confirm(options) {
     var deferred = $.Deferred();
     var view = new ConfirmView(options);
 
@@ -67,7 +67,7 @@ module.exports = Module.extend({
     return deferred;
   },
 
-  prompt: function(options) {
+  prompt(options) {
     var deferred = $.Deferred();
     var view = new PromptView(options);
 
@@ -79,16 +79,15 @@ module.exports = Module.extend({
     return deferred;
   },
 
-  open: function(view) {
-    var self = this;
+  open(view) {
     this.fragment = Backbone.history.fragment;
-    return this.close().then(function() {
-      self.isOpen = true;
-      return self.layout.open(view);
+    return this.close().then(() => {
+      this.isOpen = true;
+      return this.layout.open(view);
     });
   },
 
-  close: function() {
+  close() {
     if (this.isOpen) {
       this.isOpen = false;
       return this.layout.close();

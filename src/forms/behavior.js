@@ -6,37 +6,37 @@ module.exports = Behavior.extend({
     'submit form' : 'handleSubmit'
   },
 
-  initialize: function() {
+  initialize() {
     this.listenTo(this.view.options.model, 'change', this.onChange);
   },
 
-  serialize: function() {
+  serialize() {
     this.view.form = Syphon.serialize(this);
   },
 
-  deserialize: function() {
+  deserialize() {
     return Syphon.deserialize(this, this.view.form);
   },
 
-  onChange: function() {
+  onChange() {
     this.view.form = this.view.model.attributes;
     this.deserialize();
   },
 
-  onBeforeRender: function() {
+  onBeforeRender() {
     if (this.view.form) {
       this.serialize();
     }
   },
 
-  onDomRefresh: function () {
+  onDomRefresh() {
     if (!this.view.form) {
       this.view.form = this.view.model.attributes;
     }
     this.deserialize();
   },
 
-  handleSubmit: function (event) {
+  handleSubmit(event) {
     event.preventDefault();
     this.view.form = Syphon.serialize(this);
   }
