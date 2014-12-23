@@ -16,14 +16,14 @@ module.exports = View.extend({
     'all': 'render'
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       primaryItems   : this.serializeWhere({ type: 'primary' }),
       secondaryItems : this.serializeWhere({ type: 'secondary' })
     };
   },
 
-  serializeWhere: function(props) {
+  serializeWhere(props) {
     return _.invoke(this.collection.where(props), 'toJSON');
   },
 
@@ -35,9 +35,7 @@ module.exports = View.extend({
     'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
   },
 
-  onCollapseShow: function() {
-    this.listenToOnce(Backbone.history, 'route', function() {
-      this.ui.collapse.collapse('hide');
-    });
+  onCollapseShow() {
+    Backbone.history.once('route', () => this.ui.collapse.collapse('hide'));
   }
 });

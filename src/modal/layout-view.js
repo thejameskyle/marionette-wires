@@ -15,7 +15,7 @@ module.exports = LayoutView.extend({
     content: '.modal-content'
   },
 
-  initialize: function() {
+  initialize() {
     this.$el.modal({ show: false, backdrop: 'static' });
   },
 
@@ -26,7 +26,7 @@ module.exports = LayoutView.extend({
     'hidden.bs.modal' : { preventDefault: false, event: 'close' }
   },
 
-  open: function(view) {
+  open(view) {
     var deferred = $.Deferred();
     this.once('open', deferred.resolve);
     this.content.show(view);
@@ -34,9 +34,9 @@ module.exports = LayoutView.extend({
     return deferred;
   },
 
-  close: function() {
+  close() {
     var deferred = $.Deferred();
-    this.once('close', function() {
+    this.once('close', () => {
       this.content.empty();
       deferred.resolve();
     });

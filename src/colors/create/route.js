@@ -3,18 +3,18 @@ var Model = require('../model');
 var View = require('./view');
 
 module.exports = Route.extend({
-  initialize: function(options) {
+  initialize(options) {
     this.container = options.container;
     this.collection = options.collection;
   },
 
-  fetch: function() {
+  fetch() {
     if (this.collection.isNew()) {
       return this.collection.fetch();
     }
   },
 
-  render: function() {
+  render() {
     this.model = new Model();
     this.view = new View({
       collection: this.collection,

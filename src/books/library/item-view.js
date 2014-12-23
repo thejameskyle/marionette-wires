@@ -5,7 +5,7 @@ module.exports = ItemView.extend({
   template: template,
   tagName: 'a',
 
-  attributes: function() {
+  attributes() {
     return {
       'class' : 'list-group-item ' + (this.model.isActive() ? 'active' : ''),
       'href'  : '#books/' + this.model.get('id')

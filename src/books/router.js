@@ -8,12 +8,12 @@ var IndexRoute = require('./index/route');
 var ShowRoute = require('./show/route');
 
 module.exports = Router.extend({
-  initialize: function(options) {
+  initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
   },
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
     Radio.command('header', 'activate', { path: 'books' });
@@ -24,13 +24,13 @@ module.exports = Router.extend({
     'books/:id' : 'show'
   },
 
-  index: function() {
+  index() {
     return new IndexRoute({
       collection: this.collection
     });
   },
 
-  show: function() {
+  show() {
     return new ShowRoute({
       collection : this.collection,
       layout     : this.layout

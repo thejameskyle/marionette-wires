@@ -13,13 +13,13 @@ module.exports = View.extend({
     form: { behaviorClass: FormBehavior }
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       errors: this.errors
     };
   },
 
-  initialize: function () {
+  initialize() {
     _.bindAll(this, 'handleSaveSuccess');
   },
 
@@ -27,7 +27,7 @@ module.exports = View.extend({
     'submit form': 'handleSubmit'
   },
 
-  handleSubmit: function () {
+  handleSubmit() {
     var errors = this.model.validate(this.form);
 
     if (!errors) {
@@ -39,7 +39,7 @@ module.exports = View.extend({
     }
   },
 
-  handleSaveSuccess: function () {
+  handleSaveSuccess() {
     this.collection.add(this.model);
     Backbone.history.navigate('colors', { trigger: true });
   }

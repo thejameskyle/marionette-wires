@@ -8,7 +8,7 @@ module.exports = CompositeView.extend({
   template: template,
   className: 'colors colors--index container',
 
-  initialize: function(options) {
+  initialize(options) {
     this.models = options.collection.models;
     delete this.collection;
     this.state.start = (options.page - 1) * this.state.limit;
@@ -26,7 +26,7 @@ module.exports = CompositeView.extend({
     limit: 20
   },
 
-  onBeforeRender: function() {
+  onBeforeRender() {
     var filtered = _.chain(this.models)
       .drop(this.state.start)
       .take(this.state.limit)
@@ -35,11 +35,11 @@ module.exports = CompositeView.extend({
     this.collection = new Collection(filtered);
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     var total   = Math.floor(this.models.length / this.state.limit) + 1;
     var current = Math.floor(this.state.start / this.state.limit) + 1;
 
-    var pages = _.times(total, function(index) {
+    var pages = _.times(total, (index) => {
       return {
         current : index + 1 === current,
         page    : index + 1

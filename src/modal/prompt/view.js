@@ -11,7 +11,7 @@ module.exports = View.extend({
     'input' : 'input'
   },
 
-  initialize: function() {
+  initialize() {
     this.model = new Model(this.options);
     Radio.request('modal', 'open', this);
   },
@@ -22,19 +22,14 @@ module.exports = View.extend({
     'click .close'       : 'cancel'
   },
 
-  submit: function(e) {
+  submit(e) {
     e.preventDefault();
-    var self = this;
     var val = this.ui.input.val();
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('submit', val);
-    });
+    Radio.request('modal', 'close').then(() => this.trigger('submit', val));
   },
 
-  cancel: function() {
-    var self = this;
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('cancel');
-    });
+  cancel() {
+    Radio.request('modal', 'close').then(() =>
+      this.trigger('cancel'));
   }
 });

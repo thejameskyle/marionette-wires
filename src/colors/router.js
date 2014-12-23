@@ -8,12 +8,12 @@ var ShowRoute   = require('./show/route');
 var EditRoute   = require('./edit/route');
 
 module.exports = Router.extend({
-  initialize: function(options) {
+  initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
   },
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     Radio.command('header', 'activate', { path: 'colors' });
   },
 
@@ -24,28 +24,28 @@ module.exports = Router.extend({
     'colors/:id/edit' : 'edit'
   },
 
-  index: function() {
+  index() {
     return new IndexRoute({
       container  : this.container,
       collection : this.collection
     });
   },
 
-  create: function() {
+  create() {
     return new CreateRoute({
       container  : this.container,
       collection : this.collection
     });
   },
 
-  show: function() {
+  show() {
     return new ShowRoute({
       container  : this.container,
       collection : this.collection
     });
   },
 
-  edit: function() {
+  edit() {
     return new EditRoute({
       container  : this.container,
       collection : this.collection
