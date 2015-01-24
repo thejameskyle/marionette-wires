@@ -32,7 +32,7 @@ As a general rule, be sure to read through all of the source code yourself and m
 | ---:|:--- |
 | [api](./api) | Mock api routes |
 | [dist](./dist) | Built assets |
-| [lib](./lib) | Libraries (only ones not on npm) |
+| lib | Libraries (only ones not on npm) |
 | [src](./src) | Source files |
 | [test](./test) | Test files |
 
