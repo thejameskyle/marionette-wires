@@ -13,6 +13,12 @@ var reload = browserSync.reload;
 
 var api = require('./api/api');
 
+var watch = false;
+
+gulp.task('enable-watch', function(cb) {
+  watch = true;
+});
+
 gulp.task('clean', function(cb) {
   del([
     'app/tmp'
@@ -35,7 +41,10 @@ gulp.task('styles', function() {
 });
 
 var bundler = _.memoize(function() {
-  return watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
+  var b = browserify('./src/main.js', _.extend({ debug: true }, watchify.args));
+  if(watch)
+    return watchify(b);
+  return b;
 });
 
 function bundle() {
@@ -86,7 +95,7 @@ gulp.task('test', [
   'mocha'
 ]);
 
-gulp.task('watch', ['build'], function() {
+gulp.task('build-watch', ['build'], function() {
   browserSync({
     server: {
       baseDir: 'dist',
@@ -105,5 +114,7 @@ gulp.task('watch', ['build'], function() {
   gulp.watch(['./src/main.less', './src/**/*.less'], ['styles']);
   gulp.watch(['./src/*.html'], ['html']);
 });
+
+gulp.task('watch', ['enable-watch', 'build-watch']);
 
 gulp.task('default', ['watch']);
