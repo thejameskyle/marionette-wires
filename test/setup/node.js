@@ -4,7 +4,7 @@ if (!global.document || !global.window) {
 
   var jsdom = require('jsdom').jsdom;
 
-  global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
+  global.document = jsdom('<html><head><script></script></head><body></body></html>', {
     FetchExternalResources   : ['script'],
     ProcessExternalResources : ['script'],
     MutationEvents           : '2.0',
