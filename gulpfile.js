@@ -53,7 +53,7 @@ var bundler = _.memoize(function(watch) {
 var handleErrors = function() {
   var args = Array.prototype.slice.call(arguments);
   delete args[0]['stream']
-  $.util.log(args)
+  $.util.log.apply(null, args)
   this.emit('end');
 };
 
