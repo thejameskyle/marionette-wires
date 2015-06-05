@@ -121,6 +121,7 @@ gulp.task('watch', ['build'], function(cb) {
     gulp.start('scripts');
     gulp.start('test');
   });
+  gulp.watch('./src/**/*.hbs', ['scripts']);
   gulp.watch('./test/**/*.js', ['test']);
   gulp.watch(['./src/main.less', './src/**/*.less'], ['styles']);
   gulp.watch(['./src/*.html'], ['html']);
