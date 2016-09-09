@@ -22,6 +22,7 @@ const WiresModalService = ModalService.extend({
 
   render(view) {
     this.layout.content.show(view);
+    this.layout.animateIn();
   },
 
   remove() {
