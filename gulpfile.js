@@ -119,7 +119,7 @@ gulp.task('watch', ['build'], function() {
   bundler(true).on('update', function() {
     gulp.start('scripts');
     gulp.start('test');
-  });
+  }).bundle();
   gulp.watch('./test/**/*.js', ['test']);
   gulp.watch(['./src/main.less', './src/**/*.less'], ['styles']);
   gulp.watch(['./src/*.html'], ['html']);
